@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import { routes } from './Routes/Routes';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
+  const router = routes
   return (
     <div className="App">
-      <button className="btn btn-primary">Button</button>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
