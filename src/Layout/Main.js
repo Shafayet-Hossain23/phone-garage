@@ -4,7 +4,7 @@ import Header from '../sharedPages/Header/Header';
 
 const Main = () => {
     return (
-        <div className='lg:mx-24 mx-5'>
+        <div className='lg:mx-14 mx-5'>
             <Header></Header>
             <Outlet></Outlet>
         </div>
