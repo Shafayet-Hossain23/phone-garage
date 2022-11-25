@@ -4,6 +4,8 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
 import Home from "../Pages/Home/Home";
 import CategoryDetails from "../Pages/Home/PhoneCategories/CategoryDetails";
+import Login from "../userSignInOut/Login";
+import Register from "../userSignInOut/Register";
 
 
 
@@ -23,6 +25,14 @@ export const routes = createBrowserRouter([
             {
                 path: '/aboutUs',
                 element: <AboutUs></AboutUs>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             },
             {
                 path: '/products/:category',
