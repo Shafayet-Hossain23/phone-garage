@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from './BookingModal';
 import Product from './Product';
@@ -23,9 +24,16 @@ const CategoryDetails = () => {
                     ></Product>)
                 }
             </div>
-            <BookingModal
-                selectedProduct={selectedProduct}
-            ></BookingModal>
+            <div>
+                {selectedProduct && <BookingModal
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
+                ></BookingModal>
+                }
+            </div>
+            <div>
+                <Toaster />
+            </div>
         </div>
     );
 };

@@ -1,12 +1,44 @@
+import { stringify } from '@firebase/util';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../ContextApi/UserContext';
 
-const BookingModal = ({ selectedProduct }) => {
+const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
     const { user } = useContext(AuthContext)
-    const { category, image, time, location, originalPrice, resalePrice, sellersName, verifiedStatus, yearsOfUse, email, ProductName, phoneNo } = selectedProduct
+    const { category, image, time, location, originalPrice, resalePrice, sellersName, verifiedStatus, yearsOfUse, email, ProductName, phoneNo, _id } = selectedProduct
+    // console.log(selectedProduct)
+
     const modalHandler = (event) => {
         event.preventDefault()
         const CustomerPhone = event.target.customerPhone.value
+        // console.log(CustomerPhone)
+        const bookingInfo = {
+            customerName: user?.displayName,
+            customerEmail: user?.email,
+            customerPhoneNo: CustomerPhone,
+            ProductName,
+            resalePrice,
+            sellerPhoneNo: phoneNo,
+            sellersName,
+            sellerEmail: email,
+            categoryName: category,
+            productId: _id
+        }
+        fetch('http://localhost:5000/bookings', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    setSelectedProduct('')
+                    toast.success("Successfuly Booked. Please visit Dashboard for payment")
+                }
+            })
     }
     return (
         <div>
@@ -22,7 +54,7 @@ const BookingModal = ({ selectedProduct }) => {
                             </label>
                             <input name="customerName"
                                 defaultValue={user?.displayName}
-                                type="text" placeholder="Your Name" className="input input-bordered w-full" requried disabled />
+                                type="text" placeholder="Your Name" className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
@@ -30,7 +62,7 @@ const BookingModal = ({ selectedProduct }) => {
                             </label>
                             <input name="email" type="email" placeholder="Your Email"
                                 defaultValue={user?.email}
-                                className="input input-bordered w-full" requried disabled />
+                                className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
@@ -39,41 +71,38 @@ const BookingModal = ({ selectedProduct }) => {
                             <input name="itemName"
                                 defaultValue={ProductName}
                                 type="text" placeholder="Item Name"
-                                className="input input-bordered w-full" requried disabled />
+                                className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text"> Price</span>
                             </label>
-                            <input name="price" type="text" placeholder="Price" defaultValue={`$ ${resalePrice}`} className="input input-bordered w-full" requried disabled />
+                            <input
+                                name="price"
+                                defaultValue={resalePrice} type="text" className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text"> Meeting Location</span>
                             </label>
                             <input name="meetingLocation"
-                                defaultValue={location} type="text" placeholder="Meeting Location" className="input input-bordered w-full" requried disabled />
+                                defaultValue={location} type="text" placeholder="Meeting Location" className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text"> Seller's Phone No.</span>
                             </label>
                             <input name="sellerPhone"
-                                defaultValue={phoneNo} type="phone" placeholder="Seller's Phone No." className="input input-bordered w-full" requried disabled />
+                                defaultValue={phoneNo} type="phone" placeholder="Seller's Phone No." className="input input-bordered w-full" disabled />
                         </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text"> Your Phone No.</span>
                             </label>
                             <input name="customerPhone" type="phone"
-                                placeholder="Your's Phone No." className="input input-bordered w-full mb-5" requried />
+                                placeholder="Your's Phone No." className="input input-bordered w-full mb-5" required />
                         </div>
-                        <button className='btn w-full'>Submit</button>
-
-
-
-
-
+                        <button type='submit' className='btn w-full'>Submit</button>
                     </form>
                 </div>
             </div>
