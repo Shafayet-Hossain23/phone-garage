@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { format } from 'date-fns';
 import React from 'react';
 import Category from './Category';
 
@@ -12,6 +13,10 @@ const PhoneCategories = () => {
         }
     })
     // console.log(categories)
+    // const date = new Date()
+    // const formatDate = format(date, "PPpp")
+    // console.log(formatDate)
+
     return (
         <div>
             <div className='mb-10'>
