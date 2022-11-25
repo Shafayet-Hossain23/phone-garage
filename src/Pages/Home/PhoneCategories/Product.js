@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaBeer, FaCheckCircle } from 'react-icons/fa';
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../../ContextApi/UserContext';
 
-const Product = ({ product }) => {
+const Product = ({ product, setSelectedProduct }) => {
+    const { user } = useContext(AuthContext)
+
     const { category, image, time, location, originalPrice, resalePrice, sellersName, verifiedStatus, yearsOfUse, email, ProductName } = product
     return (
         <div className="card  bg-base-100 shadow-xl">
@@ -28,7 +32,10 @@ const Product = ({ product }) => {
                     </div>
                 </div>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Book Now</button>
+                    {
+                        user ? <label onClick={() => setSelectedProduct(product)} htmlFor="my-modal-3" className="btn btn-primary">open modal</label> : <Link to="/login"><button className="btn btn-primary">Book Now</button></Link>
+                    }
+
                 </div>
             </div>
         </div>

@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../Assets/website-logo/logo-bg-remove.png'
+import { AuthContext } from '../../ContextApi/UserContext';
 
 const Header = () => {
+    const { logOut, user } = useContext(AuthContext)
+    const logoutHandler = () => {
+        logOut()
+            .then(result => {
+
+            })
+            .then(error => {
+
+            })
+    }
     const listItems =
         <>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/blog">Blog</Link></li>
             <li><Link to="/aboutUs">About Us</Link></li>
+            {
+                user && <li><Link to="">Dashboard</Link></li>
+            }
         </>
     return (
         <div>
@@ -30,7 +44,10 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                    {
+                        user ? <button onClick={logoutHandler} className="btn btn-outline btn-error">Logout</button> : <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                    }
+
                 </div>
             </div>
         </div>

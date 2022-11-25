@@ -23,7 +23,7 @@ const Register = () => {
 
     const registerHandler = (data, e) => {
         // console.log(data)
-        const { userName, email, password } = data
+        const { userName, email, password, accountStatus } = data
         setError('')
         registerEmailPassword(email, password)
             .then(result => {
@@ -31,7 +31,7 @@ const Register = () => {
                 // console.log(user)
                 profileUpdate(userName)
                     .then(result => {
-                        saveUserData(userName, email)
+                        saveUserData(userName, email, accountStatus)
                     })
 
             })
@@ -41,8 +41,8 @@ const Register = () => {
             })
         // e.target.reset()
     }
-    const saveUserData = (name, email) => {
-        const userInfo = { name, email }
+    const saveUserData = (name, email, accountStatus) => {
+        const userInfo = { name, email, accountStatus }
         fetch('http://localhost:5000/users', {
             method: "POST",
             headers: {
@@ -52,14 +52,16 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
-                // getAccessToken(email)
                 setUserCreatedEmail(email)
                 toast.success("Successfully Register")
                 setLoading(false)
             })
     }
+    // console.log(sellerAccount)
+    // const sellerAccountHandler = (event) => {
 
+    //     console.log(event)
+    // }
 
     return (
         <div className='lg:w-2/5 w-full mx-auto mb-20 mt-14 card shadow-xl px-14 pt-8 pb-20'>
@@ -78,16 +80,6 @@ const Register = () => {
                         type="text" className="input input-bordered w-full"
                     />
                     {errors.userName && <p className='text-error' type="alert">{errors.userName?.message}</p>}
-                </div>
-                <div>
-                    <label className="label">
-                        <span className="label-text">Select Account</span>
-                    </label>
-                    <select
-                        className="select select-bordered w-full ">
-                        <option selected>Buyer Account</option>
-                        <option onClick={() => setSellerAccount(true)}>Seller Account</option>
-                    </select>
                 </div>
                 <div className="form-control w-full ">
                     <label className="label">
@@ -117,6 +109,21 @@ const Register = () => {
                 </div>
                 <div>
                     {error && <p className='text-error mt-2'>{error}</p>}
+                </div>
+                <div>
+                    <label className="label">
+                        <span className="label-text">Select Account</span>
+                    </label>
+                    <select
+                        {...register("accountStatus", {
+                            required: "Select Account is required"
+                        })}
+                        className="select select-bordered w-full ">
+                        <option defaultValue={`Buyer Account`}>Buyer Account</option>
+                        <option>Seller Account</option>
+                    </select>
+                    {errors.accountStatus && <p className='text-error mb-2'>{errors.accountStatus?.message}</p>}
+
                 </div>
                 <button className='btn w-full mt-6'>Register</button>
             </form>

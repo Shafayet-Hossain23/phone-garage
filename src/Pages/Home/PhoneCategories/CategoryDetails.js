@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from './BookingModal';
 import Product from './Product';
 
 const CategoryDetails = () => {
     const products = useLoaderData()
+    const [selectedProduct, setSelectedProduct] = useState('')
     // console.log(products)
 
     // console.log(image)
@@ -17,9 +19,13 @@ const CategoryDetails = () => {
                     products.map(product => <Product
                         key={product._id}
                         product={product}
+                        setSelectedProduct={setSelectedProduct}
                     ></Product>)
                 }
             </div>
+            <BookingModal
+                selectedProduct={selectedProduct}
+            ></BookingModal>
         </div>
     );
 };

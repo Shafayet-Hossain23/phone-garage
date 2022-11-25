@@ -42,9 +42,7 @@ const Login = () => {
         loginPopUp()
             .then(result => {
                 const user = result.user
-                // console.log(user)
                 savedDataPopUp(user.displayName, user.email)
-                // navigate(from, { replace: true });
             })
             .catch(error => {
                 const message = error.message

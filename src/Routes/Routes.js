@@ -6,6 +6,8 @@ import Home from "../Pages/Home/Home";
 import CategoryDetails from "../Pages/Home/PhoneCategories/CategoryDetails";
 import Login from "../userSignInOut/Login";
 import Register from "../userSignInOut/Register";
+import PrivateRoutes from "./PrivateRoutes";
+
 
 
 
@@ -24,7 +26,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/aboutUs',
-                element: <AboutUs></AboutUs>
+                element: <PrivateRoutes><AboutUs></AboutUs></PrivateRoutes>
             },
             {
                 path: '/login',

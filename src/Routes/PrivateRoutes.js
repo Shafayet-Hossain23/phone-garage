@@ -4,7 +4,7 @@ import Loading from '../Components/Loading';
 import { AuthContext } from '../ContextApi/UserContext';
 
 
-const PrivateRoute = ({ children }) => {
+const PrivateRoutes = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     // console.log(user, loading)
     const location = useLocation()
@@ -18,4 +18,4 @@ const PrivateRoute = ({ children }) => {
     return children
 };
 
-export default PrivateRoute;
+export default PrivateRoutes;
