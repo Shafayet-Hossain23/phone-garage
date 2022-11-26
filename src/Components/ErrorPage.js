@@ -22,9 +22,9 @@ const ErrorPage = () => {
                 <img className='w-32' src="https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132__340.png" alt="" />
             </div>
             <p className=''>An unexpected error has occurred</p>
-            {/* <p>
+            <p>
                 <i>{error.statusText || error.message}</i>
-            </p> */}
+            </p>
             <h1 className='text-2xl font-semibold'>Please logout and log in the website again</h1>
             <button className='btn btn-outline btn-error mt-5' onClick={logoutHandler}>Logout</button>
         </div>

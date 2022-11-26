@@ -5,6 +5,7 @@ import Main from "../Layout/Main";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
 import MyOrder from "../Pages/Dashboard/MyOrder";
+import Payment from "../Pages/Dashboard/Payment";
 import Home from "../Pages/Home/Home";
 import CategoryDetails from "../Pages/Home/PhoneCategories/CategoryDetails";
 import Login from "../userSignInOut/Login";
@@ -57,7 +58,14 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <MyOrder></MyOrder>
-            }
+            },
+            {
+                path: 'dashboard/payment/:id',
+                loader: ({ params }) => {
+                    return fetch(`http://localhost:5000/bookings/${params.id}`)
+                },
+                element: <Payment></Payment>
+            },
         ]
     }
 ])
