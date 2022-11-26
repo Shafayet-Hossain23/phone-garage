@@ -20,7 +20,7 @@ const Header = () => {
             <li><Link to="/blog">Blog</Link></li>
             <li><Link to="/aboutUs">About Us</Link></li>
             {
-                user && <li><Link to="">Dashboard</Link></li>
+                user && <li><Link to="/dashboard">Dashboard</Link></li>
             }
         </>
     return (
@@ -49,6 +49,9 @@ const Header = () => {
                     }
 
                 </div>
+            </div>
+            <div className='lg:hidden'>
+                <label htmlFor="dashboard-drawer" className="btn btn-active btn-ghost btn-sm drawer-button">Dashboard Menu</label>
             </div>
         </div>
     );

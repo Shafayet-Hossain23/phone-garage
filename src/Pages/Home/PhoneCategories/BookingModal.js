@@ -22,7 +22,8 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             sellersName,
             sellerEmail: email,
             categoryName: category,
-            productId: _id
+            productId: _id,
+            image
         }
         fetch('http://localhost:5000/bookings', {
             method: "POST",
@@ -33,10 +34,13 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.acknowledged) {
                     setSelectedProduct('')
                     toast.success("Successfuly Booked. Please visit Dashboard for payment")
+                }
+                else {
+                    toast.error(data.message)
                 }
             })
     }

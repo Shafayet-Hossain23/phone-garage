@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useToken from '../Components/useToken';
 
@@ -17,6 +18,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
     const token = useToken(loginEmail)
     if (token) {
+        toast.success("succesfully login")
         navigate(from, { replace: true });
     }
 
@@ -50,7 +52,12 @@ const Login = () => {
             })
     }
     const savedDataPopUp = (name, email) => {
-        const userInfo = { name, email }
+        const userInfo =
+        {
+            name,
+            email,
+            accountStatus: "Buyer Account"
+        }
         fetch('http://localhost:5000/users/popup', {
             method: "POST",
             headers: {
@@ -60,6 +67,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
+                toast.success("successfully login")
                 setLoginEmail(email)
             })
     }
