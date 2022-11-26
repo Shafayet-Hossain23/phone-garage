@@ -50,9 +50,9 @@ const Header = () => {
 
                 </div>
             </div>
-            <div className='lg:hidden'>
+            {/* <div className='lg:hidden'>
                 <label htmlFor="dashboard-drawer" className="btn btn-active btn-ghost btn-sm drawer-button">Dashboard Menu</label>
-            </div>
+            </div> */}
         </div>
     );
 };

@@ -8,6 +8,9 @@ const DashboardLayout = () => {
     return (
         <div className='lg:mx-14 mx-5'>
             <Header></Header>
+            <div className='lg:hidden'>
+                <label htmlFor="dashboard-drawer" className="btn btn-active btn-ghost btn-sm drawer-button">Dashboard Menu</label>
+            </div>
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
