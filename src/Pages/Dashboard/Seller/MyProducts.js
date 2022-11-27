@@ -32,9 +32,28 @@ const MyProducts = () => {
         })
             .then(res => res.json())
             .then(data => {
-                refetch()
-                console.log(data)
-                toast.success("Your product is advertised now")
+                if (data.acknowledged) {
+                    refetch()
+                    // console.log(data)
+                    toast.success("Your product is advertised now")
+                }
+
+            })
+    }
+    const productDeleteHandler = (id) => {
+        fetch(`http://localhost:5000/products/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount === 1) {
+                    toast.success("Successfully Deleted")
+                    refetch()
+                    console.log(data)
+                }
             })
     }
     return (
@@ -88,7 +107,7 @@ const MyProducts = () => {
                                     }
                                 </td>
                                 <td><Link
-                                    to=''
+                                    onClick={() => productDeleteHandler(product._id)}
                                     className='btn btn-xs btn-error'
                                 >Delete</Link></td>
                             </tr>)
