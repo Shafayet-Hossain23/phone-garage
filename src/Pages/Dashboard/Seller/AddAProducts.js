@@ -1,9 +1,10 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../../../ContextApi/UserContext';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../../Components/Loading';
 
 const AddAProducts = () => {
     const { user } = useContext(AuthContext)
@@ -12,7 +13,8 @@ const AddAProducts = () => {
 
     const date = new Date()
     const formatDate = format(date, "PPpp");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    // const [productLoading, setProductLoading] = useState(false)
 
     const addProductHandler = (data) => {
         const { ProductName, resalePrice, originalPrice, phoneNo, conditionType, location, yearsOfUse, category, discription } = data
@@ -43,7 +45,8 @@ const AddAProducts = () => {
                         time: formatDate,
                         email: user?.email,
                         sellersName: user?.displayName,
-                        discription
+                        discription,
+                        isAdvertise: false
                     }
                     fetch(`http://localhost:5000/products/add`, {
                         method: "POST",
@@ -56,6 +59,7 @@ const AddAProducts = () => {
                         .then(res => res.json())
                         .then(data => {
                             if (data.acknowledged) {
+
                                 toast.success("successfully add a product")
                                 navigate("/dashboard/myProducts")
                             }
@@ -63,6 +67,9 @@ const AddAProducts = () => {
                 }
             })
     }
+    // if (productLoading) {
+    //     return <Loading></Loading>
+    // }
     return (
         <div>
             <div className='my-4'>

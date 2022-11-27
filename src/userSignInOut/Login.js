@@ -8,7 +8,7 @@ import { AuthContext } from '../ContextApi/UserContext';
 
 
 const Login = () => {
-    const { loginEmailPassword, loginPopUp } = useContext(AuthContext)
+    const { loginEmailPassword, loginPopUp, setLoading } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [error, setError] = useState('');
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
     const token = useToken(loginEmail)
     if (token) {
-        toast.success("succesfully login")
+        // toast.success("succesfully login")
         navigate(from, { replace: true });
     }
 
@@ -32,6 +32,7 @@ const Login = () => {
                 const user = result.user
                 // console.log(user)
                 setLoginEmail(email)
+                setLoading(false)
 
             })
             .catch(error => {
