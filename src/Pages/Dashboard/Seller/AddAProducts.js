@@ -45,7 +45,7 @@ const AddAProducts = () => {
                         sellersName: user?.displayName,
                         discription
                     }
-                    fetch(`http://localhost:5000/products`, {
+                    fetch(`http://localhost:5000/products/add`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
