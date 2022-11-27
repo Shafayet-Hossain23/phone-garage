@@ -6,11 +6,15 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
 import MyOrder from "../Pages/Dashboard/MyOrder";
 import Payment from "../Pages/Dashboard/Payment";
+import AddAProducts from "../Pages/Dashboard/Seller/AddAProducts";
+import MyBuyers from "../Pages/Dashboard/Seller/MyBuyers";
+import MyProducts from "../Pages/Dashboard/Seller/MyProducts";
 import Home from "../Pages/Home/Home";
 import CategoryDetails from "../Pages/Home/PhoneCategories/CategoryDetails";
 import Login from "../userSignInOut/Login";
 import Register from "../userSignInOut/Register";
 import PrivateRoutes from "./PrivateRoutes";
+import PrivateSeller from "./PrivateSeller";
 
 
 
@@ -65,6 +69,18 @@ export const routes = createBrowserRouter([
                     return fetch(`http://localhost:5000/bookings/${params.id}`)
                 },
                 element: <Payment></Payment>
+            },
+            {
+                path: '/dashboard/addAProducts',
+                element: <PrivateSeller><AddAProducts></AddAProducts></PrivateSeller>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <PrivateSeller><MyProducts></MyProducts></PrivateSeller>
+            },
+            {
+                path: '/dashboard/myBuyers',
+                element: <PrivateSeller><MyBuyers></MyBuyers></PrivateSeller>
             },
         ]
     }
