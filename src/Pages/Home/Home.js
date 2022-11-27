@@ -12,8 +12,6 @@ const Home = () => {
             <PhoneCategories></PhoneCategories>
             <AdvertiseProducts></AdvertiseProducts>
             <Feedback></Feedback>
-
-
         </div>
     );
 };

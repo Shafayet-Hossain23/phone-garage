@@ -4,6 +4,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
+import MySellers from "../Pages/Dashboard/Admin/MySellers";
 import MyOrder from "../Pages/Dashboard/MyOrder";
 import Payment from "../Pages/Dashboard/Payment";
 import AddAProducts from "../Pages/Dashboard/Seller/AddAProducts";
@@ -13,6 +14,7 @@ import Home from "../Pages/Home/Home";
 import CategoryDetails from "../Pages/Home/PhoneCategories/CategoryDetails";
 import Login from "../userSignInOut/Login";
 import Register from "../userSignInOut/Register";
+import PrivateAdmin from "./PrivateAdmin";
 import PrivateRoutes from "./PrivateRoutes";
 import PrivateSeller from "./PrivateSeller";
 
@@ -81,6 +83,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/myBuyers',
                 element: <PrivateSeller><MyBuyers></MyBuyers></PrivateSeller>
+            },
+            {
+                path: '/dashboard/mySellers',
+                element: <PrivateAdmin><MySellers></MySellers></PrivateAdmin>
             },
         ]
     }

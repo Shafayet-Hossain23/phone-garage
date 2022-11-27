@@ -8,7 +8,7 @@ import { AuthContext } from '../ContextApi/UserContext';
 
 
 const Login = () => {
-    const { loginEmailPassword, loginPopUp, setLoading } = useContext(AuthContext)
+    const { loginEmailPassword, loginPopUp } = useContext(AuthContext)
     const { register, formState: { errors }, handleSubmit } = useForm()
     const [error, setError] = useState('');
     const navigate = useNavigate()
@@ -32,7 +32,7 @@ const Login = () => {
                 const user = result.user
                 // console.log(user)
                 setLoginEmail(email)
-                setLoading(false)
+                // setLoading(false)
 
             })
             .catch(error => {
