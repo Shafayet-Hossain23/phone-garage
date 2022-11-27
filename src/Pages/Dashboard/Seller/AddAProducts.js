@@ -1,10 +1,67 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from '../../../ContextApi/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const AddAProducts = () => {
+    const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const addProductHandler = (data) => {
+    const imgbbHostKey = process.env.REACT_APP_imagebb_key;
 
+    const date = new Date()
+    const formatDate = format(date, "PPpp");
+    const navigate = useNavigate()
+
+    const addProductHandler = (data) => {
+        const { ProductName, resalePrice, originalPrice, phoneNo, conditionType, location, yearsOfUse, category, discription } = data
+        // console.log(data)
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?key=${imgbbHostKey}`
+        fetch(url, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                // console.log(imgData)
+                if (imgData.success) {
+                    const productInfo = {
+                        ProductName,
+                        resalePrice,
+                        originalPrice,
+                        phoneNo,
+                        conditionType,
+                        location,
+                        yearsOfUse,
+                        category,
+                        image: imgData.data.url,
+                        paid: false,
+                        time: formatDate,
+                        email: user?.email,
+                        sellersName: user?.displayName,
+                        discription
+                    }
+                    fetch(`http://localhost:5000/products`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            authorization: `bearer ${localStorage.getItem("accessToken")}`
+                        },
+                        body: JSON.stringify(productInfo)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.acknowledged) {
+                                toast.success("successfully add a product")
+                                navigate("/dashboard/myProducts")
+                            }
+                        })
+                }
+            })
     }
     return (
         <div>
@@ -31,9 +88,9 @@ const AddAProducts = () => {
                         </label>
                         <input
                             {...register("resalePrice", {
-                                required: "Resale Price Name is required "
+                                required: "Resale Price  is required "
                             })}
-                            type="text" placeholder="Enter  Resale Price" className="input input-bordered w-full" />
+                            type="text" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
                         {errors.resalePrice && <p className='text-error mb-2'>{errors.resalePrice?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
@@ -42,9 +99,9 @@ const AddAProducts = () => {
                         </label>
                         <input
                             {...register("originalPrice", {
-                                required: "Original Price Name is required "
+                                required: "Original Price is required "
                             })}
-                            type="text" placeholder="Enter  Original Price" className="input input-bordered w-full" />
+                            type="text" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
                         {errors.originalPrice && <p className='text-error mb-2'>{errors.originalPrice?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
@@ -92,7 +149,7 @@ const AddAProducts = () => {
                             {...register("yearsOfUse", {
                                 required: "Years of purchase is required "
                             })}
-                            type="text" placeholder="EnterYears of purchase?" className="input input-bordered w-full" />
+                            type="text" placeholder="Exp: 1 years 3 months" className="input input-bordered w-full" />
                         {errors.yearsOfUse && <p className='text-error mb-2'>{errors.yearsOfUse?.message}</p>}
                     </div>
                     <div>
@@ -121,11 +178,20 @@ const AddAProducts = () => {
                             type="file" className="file-input file-input-bordered  w-full" />
                         {errors.image && <p className='text-error mb-2'>{errors.image?.message}</p>}
                     </div>
+                    <div className=''>
+                        <label className="label">
+                            <span className="label-text font-semibold">Discription?</span>
+                        </label>
+                        <textarea
+                            {...register("discription")} className="textarea textarea-bordered w-full" placeholder="Write something about your products"></textarea>
+                        {errors.discription && <p className='text-error mb-2'>{errors.discription?.message}</p>}
+                    </div>
                     <div>
                         <button type='submit' className='btn btn-primary w-full mt-6'>Add</button>
                     </div>
                 </form>
             </div>
+            <Toaster></Toaster>
         </div>
     );
 };
