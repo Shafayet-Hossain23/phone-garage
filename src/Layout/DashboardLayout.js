@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../Components/useAdmin';
 import { AuthContext } from '../ContextApi/UserContext';
 import useSeller from '../Components/useSeller';
+import Footer from '../sharedPages/Footer/Footer';
 
 
 const DashboardLayout = () => {
@@ -48,6 +49,9 @@ const DashboardLayout = () => {
                 </div>
             </div>
             <Toaster></Toaster>
+            <div>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };
