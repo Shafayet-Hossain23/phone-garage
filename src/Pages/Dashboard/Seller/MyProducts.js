@@ -3,10 +3,11 @@ import React, { useContext } from 'react';
 import Loading from '../../../Components/Loading';
 import { AuthContext } from '../../../ContextApi/UserContext';
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
-    const { data: sellerProducts = [], isLoading } = useQuery({
+    const { data: sellerProducts = [], isLoading, refetch } = useQuery({
         queryKey: ["sellerProducts", user?.email],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/sellerProducts?email=${user?.email}`, {
@@ -21,7 +22,21 @@ const MyProducts = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(sellerProducts)
+    // console.log(sellerProducts)
+    const advertiseHandler = (product) => {
+        fetch(`http://localhost:5000/advertise?id=${product?._id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                console.log(data)
+                toast.success("Your product is advertised now")
+            })
+    }
     return (
         <div>
             <div className='my-4'>
@@ -53,17 +68,21 @@ const MyProducts = () => {
                                 <td className='text-success font-semibold'>{`$ ${product.resalePrice}`}</td>
                                 <td>
                                     {
-                                        product?.paid === false &&
-
-                                        <Link
-                                            to=''
+                                        product?.paid === false && !product?.isAdvertise &&
+                                        <button onClick={() => advertiseHandler(product)}
                                             className='btn btn-xs btn-primary'
-                                        >Advertise</Link>
+                                        >Advertise</button>
+
+                                    }
+                                    {
+                                        product?.paid === false && product?.isAdvertise === true &&
+                                        <button className='btn btn-xs'
+                                            title='Your product is already advertised' disabled>Advertised</button>
 
                                     }
                                     {
                                         product?.paid === true &&
-                                        <p className='text-green-500 font-bold'>
+                                        <p className='text-primary font-bold'>
                                             Sold
                                         </p>
                                     }
@@ -77,6 +96,7 @@ const MyProducts = () => {
                     </tbody>
                 </table>
             </div>
+            <Toaster></Toaster>
 
         </div>
     );
