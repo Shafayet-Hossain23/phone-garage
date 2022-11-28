@@ -8,7 +8,7 @@ const ReportedItems = () => {
     const { data: reportItems = [], isLoading, refetch } = useQuery({
         queryKey: ["reportedItems"],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reportedItems', {
+            const res = await fetch('https://phone-garage-server.vercel.app/reportedItems', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -24,7 +24,7 @@ const ReportedItems = () => {
     const productDeleteHandler = (id) => {
         const confirm = window.confirm("Are you sure you want to delete this reported item")
         if (confirm) {
-            fetch(`http://localhost:5000/deleteReportedItem?id=${id}`, {
+            fetch(`https://phone-garage-server.vercel.app/deleteReportedItem?id=${id}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

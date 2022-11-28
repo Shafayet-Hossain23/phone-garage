@@ -8,7 +8,7 @@ const MyBuyers = () => {
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ["showMyBuyers", user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/showMyBuyers?email=${user?.email}`, {
+            const res = await fetch(`https://phone-garage-server.vercel.app/showMyBuyers?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }

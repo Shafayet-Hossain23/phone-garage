@@ -10,7 +10,7 @@ const MyProducts = () => {
     const { data: sellerProducts = [], isLoading, refetch } = useQuery({
         queryKey: ["sellerProducts", user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/sellerProducts?email=${user?.email}`, {
+            const res = await fetch(`https://phone-garage-server.vercel.app/sellerProducts?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -24,7 +24,7 @@ const MyProducts = () => {
     }
     // console.log(sellerProducts)
     const advertiseHandler = (product) => {
-        fetch(`http://localhost:5000/advertise?id=${product?._id}`, {
+        fetch(`https://phone-garage-server.vercel.app/advertise?id=${product?._id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -43,7 +43,7 @@ const MyProducts = () => {
     const productDeleteHandler = (id) => {
         const confirm = window.confirm("You want to delete this product?")
         if (confirm) {
-            fetch(`http://localhost:5000/products/delete/${id}`, {
+            fetch(`https://phone-garage-server.vercel.app/products/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`

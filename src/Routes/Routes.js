@@ -52,7 +52,7 @@ export const routes = createBrowserRouter([
             {
                 path: '/products/:category',
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/products/${params.category}`)
+                    return fetch(`https://phone-garage-server.vercel.app/products/${params.category}`)
                 },
                 element: <CategoryDetails></CategoryDetails>
             },
@@ -74,7 +74,7 @@ export const routes = createBrowserRouter([
             {
                 path: 'dashboard/payment/:id',
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/bookings/${params.id}`)
+                    return fetch(`https://phone-garage-server.vercel.app/bookings/${params.id}`)
                 },
                 element: <Payment></Payment>
             },

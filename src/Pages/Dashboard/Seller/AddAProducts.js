@@ -48,7 +48,7 @@ const AddAProducts = () => {
                         discription,
                         isAdvertise: false
                     }
-                    fetch(`http://localhost:5000/products/add`, {
+                    fetch(`https://phone-garage-server.vercel.app/products/add`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

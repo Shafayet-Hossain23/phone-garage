@@ -7,7 +7,7 @@ const AllBuyers = () => {
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ["allBuyers"],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allBuyers', {
+            const res = await fetch('https://phone-garage-server.vercel.app/allBuyers', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -23,7 +23,7 @@ const AllBuyers = () => {
     const buyerDeleteHandler = (email) => {
         const confirm = window.confirm("Are you sure you want to delete this buyers and his unpaid bookings?")
         if (confirm) {
-            fetch(`http://localhost:5000/deleteBuyer?email=${email}`, {
+            fetch(`https://phone-garage-server.vercel.app/deleteBuyer?email=${email}`, {
                 method: "DELETE",
                 headers: {
                     authorization: `bearer ${localStorage.getItem("accessToken")}`

@@ -26,7 +26,7 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             image,
             paid: false
         }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://phone-garage-server.vercel.app/bookings', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

@@ -11,7 +11,7 @@ const CategoryDetails = () => {
     const reportProductHandler = (id) => {
         const confirm = window.confirm("Are you sure you want to report this item")
         if (confirm) {
-            fetch(`http://localhost:5000/reportProduct?id=${id}`, {
+            fetch(`https://phone-garage-server.vercel.app/reportProduct?id=${id}`, {
                 method: "PUT",
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`

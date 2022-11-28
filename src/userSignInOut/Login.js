@@ -59,7 +59,7 @@ const Login = () => {
             email,
             accountStatus: "Buyer Account"
         }
-        fetch('http://localhost:5000/users/popup', {
+        fetch('https://phone-garage-server.vercel.app/users/popup', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

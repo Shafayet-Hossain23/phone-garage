@@ -10,7 +10,7 @@ const AdvertiseProducts = () => {
     const { data: products = [], isLoading } = useQuery({
         queryKey: ["advertiseProducts"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertiseProducts`)
+            const res = await fetch(`https://phone-garage-server.vercel.app/advertiseProducts`)
             const data = res.json()
             return data
         }
@@ -21,7 +21,7 @@ const AdvertiseProducts = () => {
     const reportProductHandler = (id) => {
         const confirm = window.confirm("Are you sure you want to report this item")
         if (confirm) {
-            fetch(`http://localhost:5000/reportProduct?id=${id}`, {
+            fetch(`https://phone-garage-server.vercel.app/reportProduct?id=${id}`, {
                 method: "PUT",
                 // headers: {
                 //     authorization: `bearer ${localStorage.getItem('accessToken')}`
