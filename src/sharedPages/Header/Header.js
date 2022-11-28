@@ -39,7 +39,7 @@ const Header = () => {
                             {listItems}
                         </ul>
                     </div>
-                    <img src={logo} alt="" className='w-14 mt-3' />
+                    <img src={logo} alt="" className='w-14 mt-3 hidden lg:inline' />
                     <Link className="btn btn-ghost -ml-4 normal-case text-xl text-primary">PHONE GARAGE</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -49,12 +49,9 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
 
-                    <div>
-                        {
-                            user ? <button onClick={logoutHandler} className="btn btn-outline btn-error">Logout</button> : <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
-                        }
-                    </div>
-
+                    {
+                        user ? <button onClick={logoutHandler} className="btn btn-outline btn-error">Logout</button> : <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                    }
                 </div>
             </div>
             {/* <div className='lg:hidden'>

@@ -52,7 +52,7 @@ const MyOrder = () => {
                                         book?.resalePrice && !book?.paid &&
 
                                         <Link
-                                            to={`dashboard/payment/${book._id}`}
+                                            to={`/dashboard/myOrder/dashboard/payment/${book._id}`}
                                             className='btn btn-xs btn-primary'
                                         >Pay Now</Link>
 

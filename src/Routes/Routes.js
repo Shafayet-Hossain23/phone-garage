@@ -72,7 +72,7 @@ export const routes = createBrowserRouter([
                 element: <MyOrder></MyOrder>
             },
             {
-                path: 'dashboard/payment/:id',
+                path: '/dashboard/myOrder/dashboard/payment/:id',
                 loader: ({ params }) => {
                     return fetch(`https://phone-garage-server.vercel.app/bookings/${params.id}`)
                 },
