@@ -97,7 +97,7 @@ const AddAProducts = () => {
                             {...register("resalePrice", {
                                 required: "Resale Price  is required "
                             })}
-                            type="text" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
+                            type="number" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
                         {errors.resalePrice && <p className='text-error mb-2'>{errors.resalePrice?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
@@ -108,7 +108,7 @@ const AddAProducts = () => {
                             {...register("originalPrice", {
                                 required: "Original Price is required "
                             })}
-                            type="text" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
+                            type="number" placeholder="Just provide amount. we convert it into $." className="input input-bordered w-full" />
                         {errors.originalPrice && <p className='text-error mb-2'>{errors.originalPrice?.message}</p>}
                     </div>
                     <div className="form-control w-full ">
