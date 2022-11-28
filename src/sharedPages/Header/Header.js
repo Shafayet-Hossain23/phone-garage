@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../Assets/website-logo/logo-bg-remove.png'
+import useAdmin from '../../Components/useAdmin';
+import useSeller from '../../Components/useSeller';
 import { AuthContext } from '../../ContextApi/UserContext';
 
 const Header = () => {
@@ -14,6 +16,7 @@ const Header = () => {
 
             })
     }
+
     const listItems =
         <>
             <li><Link to="/">Home</Link></li>
@@ -23,6 +26,7 @@ const Header = () => {
                 user && <li><Link to="/dashboard">Dashboard</Link></li>
             }
         </>
+
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -44,9 +48,12 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {
-                        user ? <button onClick={logoutHandler} className="btn btn-outline btn-error">Logout</button> : <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
-                    }
+
+                    <div>
+                        {
+                            user ? <button onClick={logoutHandler} className="btn btn-outline btn-error">Logout</button> : <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                        }
+                    </div>
 
                 </div>
             </div>

@@ -48,7 +48,7 @@ const Product = ({ product, setSelectedProduct, reportProductHandler }) => {
                 </div>
                 <div className="card-actions justify-end">
                     {
-                        user ? <label onClick={() => setSelectedProduct(product)} htmlFor="my-modal-3" className=" btn w-full btn-ghost ">Book Now</label> : <Link to="/login"><button className="btn  w-full btn-ghost ">Book Now</button></Link>
+                        user ? <label onClick={() => setSelectedProduct(product)} htmlFor="my-modal-3" className="btn w-full   btn-ghost">Book Now</label> : <Link to="/login"><button className="btn w-full btn-active btn-ghost">Book Now</button></Link>
                     }
 
                 </div>
