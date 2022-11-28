@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from './BookingModal';
 import Product from './Product';
@@ -7,9 +7,28 @@ import Product from './Product';
 const CategoryDetails = () => {
     const products = useLoaderData()
     const [selectedProduct, setSelectedProduct] = useState('')
-    // console.log(products)
-
-    // console.log(image)
+    // const [reportProduct, setReportProduct] = useState('')
+    const reportProductHandler = (id) => {
+        const confirm = window.confirm("Are you sure you want to report this item")
+        if (confirm) {
+            fetch(`http://localhost:5000/reportProduct?id=${id}`, {
+                method: "PUT",
+                // headers: {
+                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        toast.success("Report Done")
+                    }
+                    else {
+                        toast.error("Product is already reported")
+                    }
+                    // console.log(data)
+                })
+        }
+    }
     return (
         <div>
             <div>
@@ -21,6 +40,7 @@ const CategoryDetails = () => {
                         key={product._id}
                         product={product}
                         setSelectedProduct={setSelectedProduct}
+                        reportProductHandler={reportProductHandler}
                     ></Product>)
                 }
             </div>

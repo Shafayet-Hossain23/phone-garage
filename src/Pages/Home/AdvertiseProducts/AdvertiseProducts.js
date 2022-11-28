@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import Loading from '../../../Components/Loading';
 import BookingModal from '../PhoneCategories/BookingModal';
 import Product from '../PhoneCategories/Product';
@@ -18,6 +18,27 @@ const AdvertiseProducts = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+    const reportProductHandler = (id) => {
+        const confirm = window.confirm("Are you sure you want to report this item")
+        if (confirm) {
+            fetch(`http://localhost:5000/reportProduct?id=${id}`, {
+                method: "PUT",
+                // headers: {
+                //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+                // }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        toast.success("Report Done")
+                    }
+                    else {
+                        toast.error("Product is already reported")
+                    }
+                    console.log(data)
+                })
+        }
+    }
     return (
         <div className='my-10'>
             <div className='text-center font-bold text-3xl'>
@@ -29,6 +50,7 @@ const AdvertiseProducts = () => {
                         key={product._id}
                         product={product}
                         setSelectedProduct={setSelectedProduct}
+                        reportProductHandler={reportProductHandler}
                     ></Product>)
                 }
             </div>
