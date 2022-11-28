@@ -41,20 +41,24 @@ const MyProducts = () => {
             })
     }
     const productDeleteHandler = (id) => {
-        fetch(`http://localhost:5000/products/delete/${id}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount === 1) {
-                    toast.success("Successfully Deleted")
-                    refetch()
-                    console.log(data)
+        const confirm = window.confirm("You want to delete this product?")
+        if (confirm) {
+            fetch(`http://localhost:5000/products/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount === 1) {
+                        toast.success("Successfully Deleted")
+                        refetch()
+                        // console.log(data)
+                    }
+                })
+        }
+
     }
     return (
         <div>

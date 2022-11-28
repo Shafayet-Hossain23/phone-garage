@@ -23,7 +23,8 @@ const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
             sellerEmail: email,
             categoryName: category,
             productId: _id,
-            image
+            image,
+            paid: false
         }
         fetch('http://localhost:5000/bookings', {
             method: "POST",

@@ -4,6 +4,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import Blog from "../Pages/Blog/Blog";
+import AllBuyers from "../Pages/Dashboard/Admin/AllBuyers/AllBuyers";
 import MySellers from "../Pages/Dashboard/Admin/MySellers";
 import MyOrder from "../Pages/Dashboard/MyOrder";
 import Payment from "../Pages/Dashboard/Payment";
@@ -63,6 +64,10 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
+                element: <div className="ml-10 my-7">Click dashboard menu</div>
+            },
+            {
+                path: '/dashboard/myOrder',
                 element: <MyOrder></MyOrder>
             },
             {
@@ -87,6 +92,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/dashboard/mySellers',
                 element: <PrivateAdmin><MySellers></MySellers></PrivateAdmin>
+            },
+            {
+                path: '/dashboard/allBuyers',
+                element: <PrivateAdmin><AllBuyers></AllBuyers></PrivateAdmin>
             },
         ]
     }

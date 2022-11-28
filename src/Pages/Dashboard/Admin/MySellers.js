@@ -29,28 +29,34 @@ const MySellers = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.acknowledged) {
+                if (data.updateSeller.acknowledged && data.updateProductsByEmail.acknowledged) {
                     refetch()
                     toast.success("seller is verified now")
+
                 }
+
                 // console.log(data)
 
             })
     }
     const sellerDeleteHandler = (email) => {
-        fetch(`http://localhost:5000/deleteSeller?email=${email}`, {
-            method: "DELETE",
-            headers: {
-                authorization: `bearer ${localStorage.getItem("accessToken")}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                refetch()
-                toast.success("seller is verified now")
-                console.log(data)
-
+        const confirm = window.confirm("Are you sure you want to delete this seller and his products?")
+        if (confirm) {
+            fetch(`http://localhost:5000/deleteSeller?email=${email}`, {
+                method: "DELETE",
+                headers: {
+                    authorization: `bearer ${localStorage.getItem("accessToken")}`
+                }
             })
+                .then(res => res.json())
+                .then(data => {
+                    refetch()
+                    toast.success("Seller is deleted successfully")
+                    // console.log(data)
+
+                })
+        }
+
     }
     return (
         <div>
