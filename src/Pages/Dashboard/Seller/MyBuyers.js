@@ -20,7 +20,7 @@ const MyBuyers = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    console.log(buyers)
+    // console.log(buyers)
     return (
         <div>
             <div className='my-4'>

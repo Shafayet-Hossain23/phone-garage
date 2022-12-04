@@ -5,18 +5,22 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import useToken from '../Components/useToken';
 import { AuthContext } from '../ContextApi/UserContext';
+import Loading from '../Components/Loading';
 
 
 const Register = () => {
     const { registerEmailPassword, profileUpdate, setLoading } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors } } = useForm()
     const navigate = useNavigate()
-    const [sellerAccount, setSellerAccount] = useState(false)
     const [error, setError] = useState('')
     const [userCreatedEmail, setUserCreatedEmail] = useState('')
+    const [loader, setLoader] = useState('')
+    const [processing, setProcessing] = useState(false)
     const token = useToken(userCreatedEmail)
     useEffect(() => {
         if (token) {
+            setLoader(false)
+            setProcessing(false)
             navigate('/')
         }
     }, [token])
@@ -25,18 +29,21 @@ const Register = () => {
         // console.log(data)
         const { userName, email, password, accountStatus } = data
         setError('')
+        setProcessing(true)
         registerEmailPassword(email, password)
             .then(result => {
                 const user = result.user
                 // console.log(user)
                 profileUpdate(userName)
                     .then(result => {
+                        setLoader(true)
                         saveUserData(userName, email, accountStatus)
                     })
 
             })
             .catch(error => {
                 const message = error.message
+                setProcessing(false)
                 setError(message)
             })
         // e.target.reset()
@@ -53,7 +60,7 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 setUserCreatedEmail(email)
-                toast.success("Successfully Register")
+                // toast.success("Successfully Register")
                 setLoading(false)
             })
     }
@@ -62,6 +69,9 @@ const Register = () => {
 
     //     console.log(event)
     // }
+    if (loader) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className='lg:w-2/5 w-full mx-auto mb-20 mt-14 card shadow-xl px-14 pt-8 pb-20'>
@@ -125,7 +135,7 @@ const Register = () => {
                     {errors.accountStatus && <p className='text-error mb-2'>{errors.accountStatus?.message}</p>}
 
                 </div>
-                <button className='btn w-full mt-6'>Register</button>
+                <button type="submit" disabled={processing} className='btn w-full mt-6'>Register</button>
             </form>
             <div className="divider">OR</div>
             <div className='text-center'>

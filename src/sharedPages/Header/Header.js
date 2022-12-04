@@ -40,7 +40,7 @@ const Header = () => {
                         </ul>
                     </div>
                     <img src={logo} alt="" className='w-14 mt-3 hidden lg:inline' />
-                    <Link className="btn btn-ghost -ml-4 normal-case text-xl text-primary">PHONE GARAGE</Link>
+                    <Link className="btn btn-ghost -ml-4 normal-case text-xl text-primary hidden lg:contents md:contents">PHONE GARAGE</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">

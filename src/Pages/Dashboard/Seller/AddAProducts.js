@@ -48,7 +48,7 @@ const AddAProducts = () => {
                         discription,
                         isAdvertise: false
                     }
-                    fetch(`https://phone-garage-server.vercel.app/products/add`, {
+                    fetch(` https://phone-garage-server.vercel.app/products/add`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -58,8 +58,8 @@ const AddAProducts = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
+                            // console.log(data)
                             if (data.acknowledged) {
-
                                 toast.success("successfully add a product")
                                 navigate("/dashboard/myProducts")
                             }
@@ -198,7 +198,7 @@ const AddAProducts = () => {
                     </div>
                 </form>
             </div>
-            <Toaster></Toaster>
+            {/* <Toaster></Toaster> */}
         </div>
     );
 };

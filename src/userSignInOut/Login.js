@@ -1,9 +1,8 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Loading from '../Components/Loading';
 import useToken from '../Components/useToken';
-
 import { AuthContext } from '../ContextApi/UserContext';
 
 
@@ -14,10 +13,13 @@ const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [loginEmail, setLoginEmail] = useState('')
-
+    const [loader, setLoader] = useState('')
+    const [processing, setProcessing] = useState(false)
     const from = location.state?.from?.pathname || "/";
     const token = useToken(loginEmail)
     if (token) {
+        setLoader(false)
+        setProcessing(false)
         // toast.success("succesfully login")
         navigate(from, { replace: true });
     }
@@ -27,29 +29,35 @@ const Login = () => {
         // console.log(data)
         const { email, password } = data
         setError('')
+        setProcessing(true)
         loginEmailPassword(email, password)
             .then(result => {
                 const user = result.user
                 // console.log(user)
+                setLoader(true)
                 setLoginEmail(email)
                 // setLoading(false)
 
             })
             .catch(error => {
+                setProcessing(false)
                 const message = error.message
                 setError(message)
             })
     }
     const googleHandler = () => {
+
         setError('')
         loginPopUp()
             .then(result => {
                 const user = result.user
+                setLoader(true)
                 savedDataPopUp(user.displayName, user.email)
             })
             .catch(error => {
                 const message = error.message
                 setError(message)
+
             })
     }
     const savedDataPopUp = (name, email) => {
@@ -68,10 +76,15 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success("successfully login")
+
+                // toast.success("successfully login")
                 setLoginEmail(email)
             })
     }
+    if (loader) {
+        return <Loading></Loading>
+    }
+
     return (
         <div className='lg:w-2/5 w-full mx-auto mb-20 mt-14 card shadow-xl px-14 pt-8 pb-20'>
             <p className='text-center text-3xl'>Login</p>
@@ -108,7 +121,7 @@ const Login = () => {
                     <div>
                         {error && <p className='text-error my-2'>{error}</p>}
                     </div>
-                    <input type="submit" className='btn w-full' />
+                    <input disabled={processing} type="submit" className='btn w-full' />
                 </form>
                 <div className='text-center mt-1'>
                     <p>New to Doctor's Portal? <Link to='/register' className='text-primary'>Create new account</Link></p>

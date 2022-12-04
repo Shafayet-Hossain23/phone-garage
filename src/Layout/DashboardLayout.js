@@ -6,6 +6,7 @@ import useAdmin from '../Components/useAdmin';
 import { AuthContext } from '../ContextApi/UserContext';
 import useSeller from '../Components/useSeller';
 import Footer from '../sharedPages/Footer/Footer';
+import ScrollToTop from '../Components/ScrollToTop';
 
 
 const DashboardLayout = () => {
@@ -15,6 +16,7 @@ const DashboardLayout = () => {
     return (
         <div className='lg:mx-14 mx-5'>
             <Header></Header>
+            <ScrollToTop></ScrollToTop>
             <div className='lg:hidden'>
                 <label htmlFor="dashboard-drawer" className="btn btn-active btn-ghost btn-sm drawer-button">Dashboard Menu</label>
             </div>
@@ -27,8 +29,11 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-60 bg-base-100 text-base-content">
                         {
-                            !isSeller && !isAdmin && <li className='text-xl font-medium	'><Link to='/dashboard/myOrder'>My Orders</Link></li>
+                            <li className='text-xl font-semibold'><Link to='/dashboard/myOrder'>My Orders</Link></li>
                         }
+                        {/* {
+                            !isSeller && !isAdmin && <li className='text-xl font-medium	'><Link to='/dashboard/myOrder'>My Orders</Link></li>
+                        } */}
                         {
                             isSeller && <>
                                 <li className='text-xl font-semibold'><Link to='/dashboard/addAProducts'>Add A Products</Link></li>

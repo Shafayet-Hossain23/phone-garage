@@ -103,7 +103,7 @@ const MySellers = () => {
                     </tbody>
                 </table>
             </div>
-            <Toaster></Toaster>
+            {/* <Toaster></Toaster> */}
         </div>
     );
 };

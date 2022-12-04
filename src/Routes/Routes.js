@@ -65,8 +65,12 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <div className="ml-10 my-7">Click dashboard menu</div>
+                element: <MyOrder></MyOrder>
             },
+            // {
+            //     path: '/dashboard',
+            //     element: <div className="ml-10 my-7">Click dashboard menu</div>
+            // },
             {
                 path: '/dashboard/myOrder',
                 element: <MyOrder></MyOrder>

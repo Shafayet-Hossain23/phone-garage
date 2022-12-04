@@ -72,7 +72,7 @@ const AllBuyers = () => {
                     </tbody>
                 </table>
             </div>
-            <Toaster></Toaster>
+            {/* <Toaster></Toaster> */}
         </div>
     );
 };

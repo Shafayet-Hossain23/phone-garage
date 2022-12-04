@@ -9,7 +9,7 @@ const Product = ({ product, setSelectedProduct, reportProductHandler }) => {
     const { category, image, time, location, originalPrice, resalePrice, sellersName, verifiedStatus, yearsOfUse, email, ProductName, _id } = product
     return (
         <div className="card  bg-base-100 shadow-xl">
-            <figure><img src={image} alt="" className='w-full h-96' /></figure>
+            <figure><img src={image} alt="" className='w-full h-72' /></figure>
             <div className="divider my-0"></div>
             <div className='flex justify-between'>
                 <div>

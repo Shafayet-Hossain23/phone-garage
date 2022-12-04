@@ -34,7 +34,7 @@ const CategoryDetails = () => {
             <div>
                 <h1 className='text-center text-3xl font-semibold mb-10'>{`Some Collection For You`}</h1>
             </div>
-            <div className='grid lg:grid-cols-2 grid-cols-1 gap-5  '>
+            <div className='grid lg:grid-cols-3 grid-cols-1 gap-7  '>
                 {
                     products.map(product => <Product
                         key={product._id}

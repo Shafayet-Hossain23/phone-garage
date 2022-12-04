@@ -44,7 +44,7 @@ const AdvertiseProducts = () => {
             <div className='text-center font-bold text-3xl'>
                 <h1>Advertise Products</h1>
             </div>
-            <div className='grid lg:grid-cols-2 grid-cols-1 gap-5 my-10 '>
+            <div className='grid lg:grid-cols-3 grid-cols-1 gap-7 my-10 '>
                 {
                     products.map(product => <Product
                         key={product._id}
