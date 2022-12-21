@@ -110,7 +110,7 @@ const Register = () => {
                     <input
                         {...register("password", {
                             minLength: { value: 6, message: "Password should be atleast 6 characters" },
-                            pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*?/])(?=.*[0-9])(?=.*[a-z])/, message: "Password must be strong" }
+                            // pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*?/])(?=.*[0-9])(?=.*[a-z])/, message: "Password must be strong" }
 
                         })}
                         type="password" className="input input-bordered w-full"
